@@ -16,11 +16,11 @@ class B {
 }
 
 class A {
+    private B objB; // Dependency
     public void callB() {
-        B objB = new B();
-        objB.test(); // Dependency
+        objB = new B();
+        objB.test(); 
     }
-
 }
 ```
 
@@ -29,7 +29,7 @@ class A {
 In Spring containers, we outsource instantiation of objects (using spring containers) and these instantiated objects are assigned to dependent object variables with the help of a certain configuration. 
 
 ### Benifits of Dependency Injection
-- Lose coupling: As we can change configuration any time, we can achive lose coupling.
+- Loose coupling: As we can change configuration any time, we can achive loose coupling.
 
 - We get much modular code.
 
@@ -40,5 +40,3 @@ In Spring containers, we outsource instantiation of objects (using spring contai
 **Setter Injection:** Using setter method spring container will inject the dependencies.
 
 **Constructor Injection:** Using constructor spring container will inject the dependencies.
-
-**Inteface Injection:** In interface-based dependency injection, we will have an interface and on implementing it we will get the instance injected.

@@ -42,25 +42,3 @@ class Example {
 ```
 
 Spring implements IoC with Dependency Injection(DI). In DI the control is inverted by setting an object's dependencies.
-
-**What is dependency?**
-
-Suppose Class A calls a function from Class B by creating an instance of class B in it, then Class A is dependent on class B.
-
-```
-class B {
-    public void test() {
-        ...
-        // code
-        ...
-    }
-}
-
-class A {
-    public void callB() {
-        B objB = new B();
-        objB.test(); // Dependency
-    }
-
-}
-```
