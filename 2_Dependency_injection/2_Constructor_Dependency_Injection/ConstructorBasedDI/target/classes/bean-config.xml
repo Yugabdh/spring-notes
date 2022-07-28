@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> 
+
+	<!-- Creating subject beans  -->
+	<bean id="subject_1" class="com.example.models.Subject">
+		<property name="id" value="subject001" />
+		<property name="name" value="English" />
+	</bean>
+	<bean id="subject_2" class="com.example.models.Subject">
+		<property name="id" value="subject002" />
+		<property name="name" value="Hindi" />
+	</bean>
+	<bean id="subject_3" class="com.example.models.Subject">
+		<property name="id" value="subject003" />
+		<property name="name" value="Japanese" />
+	</bean>
+	
+	<!-- Creating Course bean  -->
+	<bean id="course_1" class="com.example.models.Course">
+		<property name="id" value="course001" />
+		<property name="name" value="Language Course" />
+		<!-- Assigning previously created subject beans to subjects array  -->
+		<property name="subjects">
+			<list value-type="com.example.models.Subject">
+				<ref bean="subject_1" />
+				<ref bean="subject_2" />
+				<ref bean="subject_3" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="student_1" class="com.example.models.Student">
+		<constructor-arg index="0" value="01" />
+		<constructor-arg index="1" value="Master Potato" />
+		<constructor-arg index="2" ref="course_1" />
+	</bean>
+</beans>
