@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- singleton bean have property of: instance per Spring IoC container. 
+		It is useful here because having ability instantiated at start is what we 
+		want -->
+
+	<bean id="sword_01" class="com.example.model.Weapon"
+		scope="singleton">
+		<property name="id" value="01" />
+		<property name="type" value="sword" />
+		<property name="name" value="Sacred Sword" />
+		<!-- type conversion is done automatically -->
+		<property name="attack" value="100" />
+	</bean>
+
+	<!-- beans have singleton scope by default -->
+	<bean id="bow_01" class="com.example.model.Weapon">
+		<property name="id" value="01" />
+		<property name="type" value="bow" />
+		<property name="name" value="Cursed Bow" />
+		<property name="attack" value="110" />
+	</bean>
+
+	<!-- prototype scope creates new bean each time we are using prototype scope 
+		here because of healthleft attribute which is like state each armor will 
+		have different state so we can't use same object every time -->
+	<bean id="armor_basic" class="com.example.model.Armor"
+		scope="prototype">
+		<property name="id" value="01" />
+		<property name="type" value="basic" />
+		<property name="hitPoint" value="100" />
+		<property name="healthLeft" value="100" />
+	</bean>
+
+	<bean id="armor_super" class="com.example.model.Armor">
+		<property name="id" value="01" />
+		<property name="type" value="super" />
+		<property name="hitPoint" value="200" />
+		<property name="healthLeft" value="200" />
+	</bean>
+
+
+	<bean id="npc" class="com.example.model.CharacterClass">
+		<property name="id" value="01" />
+		<property name="name" value="NPC boie" />
+		<!-- using reference to other beans to use them as it is -->
+		<property name="weapon">
+			<!-- inner bean example -->
+			<!-- no need of id/name here cause inner bean -->
+			<bean class="com.example.model.Weapon">
+				<property name="id" value="00" />
+				<property name="type" value="sword" />
+				<property name="name" value="Simple Sword" />
+				<!-- type conversion is done automatically -->
+				<property name="attack" value="100" />
+			</bean>
+		</property>
+		<property name="armor">
+			<bean class="com.example.model.Armor">
+				<property name="id" value="00" />
+				<property name="type" value="basic" />
+				<property name="hitPoint" value="100" />
+				<property name="healthLeft" value="100" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="player_1" class="com.example.model.CharacterClass">
+		<property name="id" value="01" />
+		<property name="name" value="Big boie" />
+		<!-- using reference to other beans to use them as it is -->
+		<property name="weapon" ref="sword_01" />
+
+		<property name="armor" ref="armor_super" />
+	</bean>
+
+
+	<bean id="player_2" class="com.example.model.CharacterClass">
+		<!-- Constructor based DI -->
+		<!-- As there are 2 arguments with same type for this constructor we have 
+			to use index attribute -->
+		<constructor-arg index="0" value="01" />
+		<constructor-arg index="1" value="Smol boie" />
+		<constructor-arg index="2" ref="bow_01" />
+		<constructor-arg index="3" ref="armor_basic" />
+	</bean>
+</beans>

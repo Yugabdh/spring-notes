@@ -78,18 +78,18 @@ Autowiring can significantly reduce the need to specify properties or constructo
 
 (Default) Scopes a single bean definition to a single object instance per Spring IoC container.
 
-**prototype**
+**prototype:**
 	
 Scopes a single bean definition to any number of object instances.
 
-**request**
+**request:**
 	
 Scopes a single bean definition to the lifecycle of a single HTTP request; that is, each HTTP request has its own instance of a bean created off the back of a single bean definition. Only valid in the context of a web-aware Spring ApplicationContext.
 
-**session**
+**session:**
 	
 Scopes a single bean definition to the lifecycle of an HTTP Session. Only valid in the context of a web-aware Spring ApplicationContext.
 
-**global session**
+**global session:**
 
 Scopes a single bean definition to the lifecycle of a global HTTP Session. Typically only valid when used in a portlet context. Only valid in the context of a web-aware Spring ApplicationContext.

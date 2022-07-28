@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="sword_01" name="weapon" class="com.example.model.Weapon">
+		<property name="id" value="01" />
+		<property name="type" value="sword" />
+		<property name="name" value="Sacred Sword" />
+		<!-- type conversion is done automatically -->
+		<property name="attack" value="100" />
+	</bean>
+
+	<bean id="bow_01" name="weapon_bow"
+		class="com.example.model.Weapon">
+		<property name="id" value="01" />
+		<property name="type" value="bow" />
+		<property name="name" value="Cursed Bow" />
+		<!-- type conversion is done automatically -->
+		<property name="attack" value="110" />
+	</bean>
+
+	<bean id="armor_basic" name="armor"
+		class="com.example.model.Armor" scope="prototype">
+		<property name="id" value="01" />
+		<property name="type" value="basic" />
+		<property name="hitPoint" value="100" />
+		<property name="healthLeft" value="100" />
+	</bean>
+
+
+
+	<!-- Autowiring bean byName value of name attribute and attribute in Java 
+		class should be same -->
+	<bean id="player_1" class="com.example.model.CharacterClass"
+		autowire="byName">
+		<property name="id" value="01" />
+		<property name="name" value="Autowiried Big boie" />
+	</bean>
+
+	<!-- Autowiring bean byType Beans of same type will be autowired to following 
+		beans property -->
+	<bean id="player_2" class="com.example.model.CharacterClass"
+		autowire="byType">
+		<property name="id" value="02" />
+		<property name="name" value="Autowiried Smol boie" />
+		<!-- As there are two beans of type Weapon so mapping it manually else 
+			it will cause error -->
+		<property name="weapon" ref="bow_01" />
+	</bean>
+
+	<!-- Autowiring bean byType Beans of same type will be autowired to following 
+		beans property -->
+
+	<bean id="npc" class="com.example.model.CharacterClass"
+		autowire="constructor">
+
+		<!-- As our constructor have other generic arguments we have to pass them 
+			using constructor-arg PASSING THEM USING property TAG CAUSES OTHER ATTRIBUTES 
+			TO SET TO NULL -->
+		<constructor-arg index="0" value="01" />
+		<constructor-arg index="1" value="Autowiried NPC Boie" />
+	</bean>
+</beans>
